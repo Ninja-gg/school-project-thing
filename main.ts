@@ -53,7 +53,7 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
 })
 function start_presentation () {
     tiles.setCurrentTilemap(tilemap`level2`)
-    shrek.setPosition(125, 150)
+    shrek.setPosition(tilemap_to_pixels(29), tilemap_to_pixels(18))
     controller.moveSprite(shrek, 100, 100)
     scene.cameraFollowSprite(shrek)
     selctor_position = 0
@@ -66,7 +66,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function tilemap_to_pixels (position: number) {
-    return position
+    return position * 16 - 8
 }
 let What_are_Majic_Mushrooms: TextSprite = null
 let selctor_position = 0
@@ -235,7 +235,7 @@ shrek = sprites.create(img`
     `, SpriteKind.Player)
 shrek.setPosition(-1000, 0)
 selctor_position = 1
-What_are_Majic_Mushrooms = textsprite.create("What Are Majic mushrooms?", 0, 15)
+What_are_Majic_Mushrooms = textsprite.create("What Are Majic Mushrooms?", 0, 15)
 What_are_Majic_Mushrooms.setMaxFontHeight(10)
 What_are_Majic_Mushrooms.setPosition(-1700, 0)
 game.onUpdate(function () {
