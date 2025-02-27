@@ -5,7 +5,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selctor_position == 1) {
-        start_presentation()
+        setup_presentation()
     } else if (selctor_position == 0) {
         shrek.setImage(img`
             . f f f f . . . . . f f f f . . 
@@ -28,6 +28,18 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         controller.moveSprite(shrek, 400, 400)
     }
 })
+function setup_presentation () {
+    tiles.setCurrentTilemap(tilemap`level2`)
+    shrek.setPosition(tilemap_to_pixels(29), tilemap_to_pixels(18))
+    controller.moveSprite(shrek, 100, 100)
+    scene.cameraFollowSprite(shrek)
+    selctor_position = 0
+    pressentation.setPosition(-1000, 0)
+    What_are_Majic_Mushrooms.setPosition(tilemap_to_pixels(12) - 1, tilemap_to_pixels(18))
+    What_are_these_Hallucinations.setPosition(tilemap_to_pixels(24) - 1, tilemap_to_pixels(32))
+    What_are_these_Hallucinations.setPosition(tilemap_to_pixels(24) - 1, tilemap_to_pixels(32))
+    Other_Effects.setPosition(tilemap_to_pixels(34) - 1, tilemap_to_pixels(18))
+}
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     if (selctor_position == 0) {
         shrek.setImage(img`
@@ -51,15 +63,6 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
         controller.moveSprite(shrek, 100, 100)
     }
 })
-function start_presentation () {
-    tiles.setCurrentTilemap(tilemap`level2`)
-    shrek.setPosition(tilemap_to_pixels(29), tilemap_to_pixels(18))
-    controller.moveSprite(shrek, 100, 100)
-    scene.cameraFollowSprite(shrek)
-    selctor_position = 0
-    pressentation.setPosition(-1000, 0)
-    What_are_Majic_Mushrooms.setPosition(0, 0)
-}
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selctor_position > 0) {
         selctor_position += 1
@@ -68,6 +71,8 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 function tilemap_to_pixels (position: number) {
     return position * 16 - 8
 }
+let Other_Effects: TextSprite = null
+let What_are_these_Hallucinations: TextSprite = null
 let What_are_Majic_Mushrooms: TextSprite = null
 let selctor_position = 0
 let shrek: Sprite = null
@@ -238,6 +243,12 @@ selctor_position = 1
 What_are_Majic_Mushrooms = textsprite.create("What Are Majic Mushrooms?", 0, 15)
 What_are_Majic_Mushrooms.setMaxFontHeight(10)
 What_are_Majic_Mushrooms.setPosition(-1700, 0)
+What_are_these_Hallucinations = textsprite.create("What Are These Hallucinations?", 0, 15)
+What_are_these_Hallucinations.setMaxFontHeight(10)
+What_are_these_Hallucinations.setPosition(-1700, 0)
+Other_Effects = textsprite.create("Any Other Effects?", 0, 15)
+Other_Effects.setMaxFontHeight(10)
+Other_Effects.setPosition(-1700, 0)
 game.onUpdate(function () {
     if (selctor_position == 1) {
         selector.setPosition(30, 90)
