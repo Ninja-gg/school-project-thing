@@ -28,6 +28,18 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         controller.moveSprite(shrek, 400, 400)
     }
 })
+function start_presentation () {
+    tiles.setCurrentTilemap(tilemap`level2`)
+    FillText()
+    shrek.setPosition(tilemap_to_pixels(28), tilemap_to_pixels(18))
+    controller.moveSprite(shrek, 100, 100)
+    scene.cameraFollowSprite(shrek)
+    selctor_position = 0
+    pressentation.setPosition(-1000, 0)
+    What_are_Majic_Mushrooms.setPosition(tilemap_to_pixels(11), tilemap_to_pixels(17))
+    Any_other_Effects.setPosition(tilemap_to_pixels(35), tilemap_to_pixels(17))
+    what_are_these_hallucinations.setPosition(tilemap_to_pixels(24), tilemap_to_pixels(31))
+}
 function AppendText (TextArray: TextSprite[], Text: string) {
     temporarySprite = textsprite.create(Text)
     temporarySprite.setPosition(-1000, 0)
@@ -38,18 +50,17 @@ function AppendText (TextArray: TextSprite[], Text: string) {
     }
 }
 function FillText () {
-    let list: number[] = []
     AppendText(textWhatAreShrooms, "Mushrooms are recreational drugs.")
     AppendText(textWhatAreShrooms, "Mushrooms are bad bad bad.")
-    MakeText(textWhatAreShrooms, 2, 20, 18, list)
+    MakeText(textWhatAreShrooms, 2, 18, 21, 24)
     AppendText(textWhatAreHallucinations, "Hallucinations are things you see that")
     AppendText(textWhatAreHallucinations, "aren't really there!")
     AppendText(textWhatAreHallucinations, "Hallucinations are scary sometimes.")
     AppendText(textWhatAreHallucinations, "Hallucinations can cause people to jump off the roof of buildings.")
-    MakeText(textWhatAreHallucinations, 8, 41, 32, list)
+    MakeText(textWhatAreHallucinations, 8, 32, 41, 40)
     AppendText(textWhatOtherEffects, "Causes a high heart rate")
     AppendText(textWhatOtherEffects, "Might cause job loss")
-    MakeText(textWhatOtherEffects, 23, 43, 18, list)
+    MakeText(textWhatOtherEffects, 26, 18, 43, 24)
 }
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     if (selctor_position == 0) {
@@ -74,24 +85,12 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
         controller.moveSprite(shrek, 100, 100)
     }
 })
-function start_presentation () {
-    tiles.setCurrentTilemap(tilemap`level2`)
-    FillText()
-    shrek.setPosition(tilemap_to_pixels(28), tilemap_to_pixels(18))
-    controller.moveSprite(shrek, 100, 100)
-    scene.cameraFollowSprite(shrek)
-    selctor_position = 0
-    pressentation.setPosition(-1000, 0)
-    What_are_Majic_Mushrooms.setPosition(tilemap_to_pixels(11), tilemap_to_pixels(17))
-    Any_other_Effects.setPosition(tilemap_to_pixels(35), tilemap_to_pixels(17))
-    what_are_these_hallucinations.setPosition(tilemap_to_pixels(24), tilemap_to_pixels(31))
-}
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selctor_position > 0) {
         selctor_position += 1
     }
 })
-function MakeText (textArray: Sprite[], xMin: number, yMin: number, xMax: number, yMax: any[]) {
+function MakeText (textArray: Sprite[], xMin: number, yMin: number, xMax: number, yMax: number) {
     xCtr = tilemap_to_pixels((xMin + xMax) / 2)
     yStart = tilemap_to_pixels(yMin)
     yDelta = 16
