@@ -28,6 +28,20 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         controller.moveSprite(shrek, 400, 400)
     }
 })
+function AppendText (TextArray: TextSprite[], Text: string) {
+    temporarySprite = textsprite.create(Text)
+    temporarySprite.setPosition(-1000, 0)
+    if (TextArray[0] == dummyTextSprite) {
+        TextArray[0] = temporarySprite
+    } else {
+        TextArray.push(temporarySprite)
+    }
+}
+function FillText () {
+    AppendText(textWhatAreShrooms, "Mushrooms are recreational drugs.")
+    AppendText(textWhatAreShrooms, "Mushrooms are bad bad bad.")
+    MakeText(textWhatAreShrooms, 2, 20, 18)
+}
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     if (selctor_position == 0) {
         shrek.setImage(img`
@@ -53,23 +67,41 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
 })
 function start_presentation () {
     tiles.setCurrentTilemap(tilemap`level2`)
-    shrek.setPosition(tilemap_to_pixels(29), tilemap_to_pixels(18))
+    FillText()
+    shrek.setPosition(tilemap_to_pixels(28), tilemap_to_pixels(18))
     controller.moveSprite(shrek, 100, 100)
     scene.cameraFollowSprite(shrek)
     selctor_position = 0
     pressentation.setPosition(-1000, 0)
-    What_are_Majic_Mushrooms.setPosition(tilemap_to_pixels(12), tilemap_to_pixels(18))
-    Any_other_Effects.setPosition(tilemap_to_pixels(34), tilemap_to_pixels(18))
-    what_are_these_hallucinations.setPosition(tilemap_to_pixels(25), tilemap_to_pixels(32))
+    What_are_Majic_Mushrooms.setPosition(tilemap_to_pixels(11), tilemap_to_pixels(17))
+    Any_other_Effects.setPosition(tilemap_to_pixels(35), tilemap_to_pixels(17))
+    what_are_these_hallucinations.setPosition(tilemap_to_pixels(24), tilemap_to_pixels(31))
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selctor_position > 0) {
         selctor_position += 1
     }
 })
-function tilemap_to_pixels (position: number) {
-    return position * 16 - 8
+function MakeText (textArray: Sprite[], xMin: number, xMax: number, yMin: number) {
+    xCtr = tilemap_to_pixels((xMin + xMax) / 2)
+    yStart = tilemap_to_pixels(yMin)
+    yDelta = 16
+    yVal = tilemap_to_pixels(yMin)
+    for (let currentText of textArray) {
+        currentText.setPosition(xCtr, yVal)
+        yVal += yDelta
+    }
 }
+function tilemap_to_pixels (position: number) {
+    return position * 16 + 8
+}
+let yVal = 0
+let yDelta = 0
+let yStart = 0
+let xCtr = 0
+let temporarySprite: TextSprite = null
+let textWhatAreShrooms: TextSprite[] = []
+let dummyTextSprite: TextSprite = null
 let Any_other_Effects: TextSprite = null
 let what_are_these_hallucinations: TextSprite = null
 let What_are_Majic_Mushrooms: TextSprite = null
@@ -239,7 +271,7 @@ shrek = sprites.create(img`
     `, SpriteKind.Player)
 shrek.setPosition(-1000, 0)
 selctor_position = 1
-What_are_Majic_Mushrooms = textsprite.create("What Are Majic Mushrooms?", 0, 15)
+What_are_Majic_Mushrooms = textsprite.create("What Are Magic Mushrooms?", 0, 15)
 What_are_Majic_Mushrooms.setMaxFontHeight(10)
 What_are_Majic_Mushrooms.setPosition(-1700, 0)
 what_are_these_hallucinations = textsprite.create("What Are These Hallucinations?", 0, 15)
@@ -248,6 +280,9 @@ what_are_these_hallucinations.setPosition(-1700, 0)
 Any_other_Effects = textsprite.create("Any Other Effects?", 0, 15)
 Any_other_Effects.setMaxFontHeight(10)
 Any_other_Effects.setPosition(-1700, 0)
+dummyTextSprite = textsprite.create("Dummy")
+dummyTextSprite.setPosition(-1000, 0)
+textWhatAreShrooms = [dummyTextSprite]
 game.onUpdate(function () {
     if (selctor_position == 1) {
         selector.setPosition(30, 90)
