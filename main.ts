@@ -38,9 +38,18 @@ function AppendText (TextArray: TextSprite[], Text: string) {
     }
 }
 function FillText () {
+    let list: number[] = []
     AppendText(textWhatAreShrooms, "Mushrooms are recreational drugs.")
     AppendText(textWhatAreShrooms, "Mushrooms are bad bad bad.")
-    MakeText(textWhatAreShrooms, 2, 20, 18)
+    MakeText(textWhatAreShrooms, 2, 20, 18, list)
+    AppendText(textWhatAreHallucinations, "Hallucinations are things you see that")
+    AppendText(textWhatAreHallucinations, "aren't really there!")
+    AppendText(textWhatAreHallucinations, "Hallucinations are scary sometimes.")
+    AppendText(textWhatAreHallucinations, "Hallucinations can cause people to jump off the roof of buildings.")
+    MakeText(textWhatAreHallucinations, 8, 41, 32, list)
+    AppendText(textWhatOtherEffects, "Causes a high heart rate")
+    AppendText(textWhatOtherEffects, "Might cause job loss")
+    MakeText(textWhatOtherEffects, 23, 43, 18, list)
 }
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     if (selctor_position == 0) {
@@ -82,7 +91,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         selctor_position += 1
     }
 })
-function MakeText (textArray: Sprite[], xMin: number, xMax: number, yMin: number) {
+function MakeText (textArray: Sprite[], xMin: number, yMin: number, xMax: number, yMax: any[]) {
     xCtr = tilemap_to_pixels((xMin + xMax) / 2)
     yStart = tilemap_to_pixels(yMin)
     yDelta = 16
@@ -100,6 +109,8 @@ let yDelta = 0
 let yStart = 0
 let xCtr = 0
 let temporarySprite: TextSprite = null
+let textWhatOtherEffects: TextSprite[] = []
+let textWhatAreHallucinations: TextSprite[] = []
 let textWhatAreShrooms: TextSprite[] = []
 let dummyTextSprite: TextSprite = null
 let Any_other_Effects: TextSprite = null
@@ -283,6 +294,8 @@ Any_other_Effects.setPosition(-1700, 0)
 dummyTextSprite = textsprite.create("Dummy")
 dummyTextSprite.setPosition(-1000, 0)
 textWhatAreShrooms = [dummyTextSprite]
+textWhatAreHallucinations = [dummyTextSprite]
+textWhatOtherEffects = [dummyTextSprite]
 game.onUpdate(function () {
     if (selctor_position == 1) {
         selector.setPosition(30, 90)
