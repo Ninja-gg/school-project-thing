@@ -41,7 +41,7 @@ function start_presentation () {
     what_are_these_hallucinations.setPosition(tilemap_to_pixels(24), tilemap_to_pixels(31))
 }
 function AppendText (TextArray: TextSprite[], Text: string) {
-    temporarySprite = textsprite.create(Text)
+    temporarySprite = textsprite.create(Text, 0, 15)
     temporarySprite.setPosition(-1000, 0)
     if (TextArray[0] == dummyTextSprite) {
         TextArray[0] = temporarySprite
@@ -50,16 +50,30 @@ function AppendText (TextArray: TextSprite[], Text: string) {
     }
 }
 function FillText () {
-    AppendText(textWhatAreShrooms, "Mushrooms are recreational drugs.")
-    AppendText(textWhatAreShrooms, "Mushrooms are bad bad bad.")
+    AppendText(textWhatAreShrooms, "Magic Mushrooms are mushrooms that contain")
+    AppendText(textWhatAreShrooms, "psilocybin and psilocyn. which are ")
+    AppendText(textWhatAreShrooms, "substances that cause hallucinations, which")
+    AppendText(textWhatAreShrooms, "are called trips. you can have these mushrooms")
+    AppendText(textWhatAreShrooms, "either fresh or dried, and to consume it you")
+    AppendText(textWhatAreShrooms, "can either eat it or mix it with a tea.")
     MakeText(textWhatAreShrooms, 2, 18, 21, 24)
-    AppendText(textWhatAreHallucinations, "Hallucinations are things you see that")
-    AppendText(textWhatAreHallucinations, "aren't really there!")
-    AppendText(textWhatAreHallucinations, "Hallucinations are scary sometimes.")
-    AppendText(textWhatAreHallucinations, "Hallucinations can cause people to jump off the roof of buildings.")
+    AppendText(textWhatAreHallucinations, "The hallucinations that a person gets from magic mushrooms depends on a couple factors,")
+    AppendText(textWhatAreHallucinations, "the persons mood, their personality, expectations the person has, and of course how much")
+    AppendText(textWhatAreHallucinations, "you ate and how strong those mushrooms are. Now what can these hallucinations be becasuse")
+    AppendText(textWhatAreHallucinations, "of those factors? well, hallucinations can range from having a relaxing day to a scary ")
+    AppendText(textWhatAreHallucinations, "hallucination about the persons worst fears. It's kind of like dreams. except the diffrence")
+    AppendText(textWhatAreHallucinations, "between dreams and hallucinations is that when dreams happen only when your tired,")
+    AppendText(textWhatAreHallucinations, "Hallucinations can happen at any point of the day and their is no warning it will happen.")
+    AppendText(textWhatAreHallucinations, "for some mushroom users after the effects of magic mushrooms have gone away, they may have")
+    AppendText(textWhatAreHallucinations, "a flashback of a hallucination. Just like hallucinations their is no warning it will start.")
     MakeText(textWhatAreHallucinations, 8, 32, 41, 40)
-    AppendText(textWhatOtherEffects, "Causes a high heart rate")
-    AppendText(textWhatOtherEffects, "Might cause job loss")
+    AppendText(textWhatOtherEffects, "Other effects that may happen if you eat")
+    AppendText(textWhatOtherEffects, "these include: increased heart rate and")
+    AppendText(textWhatOtherEffects, "blood pressure, drowsiness, muscle weakness,")
+    AppendText(textWhatOtherEffects, "dilated pupils, and lack of coordination.")
+    AppendText(textWhatOtherEffects, "Sometimes when someone takes a large amount")
+    AppendText(textWhatOtherEffects, "of magic mushrooms the side effects are big")
+    AppendText(textWhatOtherEffects, "enough to cause death.")
     MakeText(textWhatOtherEffects, 26, 18, 43, 24)
 }
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
