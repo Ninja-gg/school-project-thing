@@ -11,9 +11,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (selector_position == 1) {
         start_presentation()
     } else if (selector_position == 2) {
-        if (rocket_boosters) {
-            rocket_boosters = false
-            Rocket_Boosters.setIcon(img`
+        if (rocketBoostersOn) {
+            rocketBoostersOn = false
+            rocketBoosters.setIcon(img`
                 . 7 7 7 7 7 7 . 
                 7 7 b b b b 7 7 
                 7 b b b b b b 7 
@@ -24,8 +24,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 . 7 7 7 7 7 7 . 
                 `)
         } else {
-            rocket_boosters = true
-            Rocket_Boosters.setIcon(img`
+            rocketBoostersOn = true
+            rocketBoosters.setIcon(img`
                 . 7 7 7 7 7 7 . 
                 7 7 5 5 5 5 7 7 
                 7 5 5 5 5 5 5 7 
@@ -36,7 +36,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 . 7 7 7 7 7 7 . 
                 `)
         }
-    } else if (selector_position == 0 && rocket_boosters) {
+    } else if (selector_position == 0 && rocketBoostersOn) {
         shrek.setImage(img`
             . f f f f . . . . . f f f f . . 
             . f 7 7 f 2 2 . 2 2 f 7 7 f . . 
@@ -66,10 +66,10 @@ function start_presentation () {
     scene.cameraFollowSprite(shrek)
     selector_position = 0
     pressentation.setPosition(-1000, 0)
-    Rocket_Boosters.setPosition(-1000, 0)
-    What_are_Majic_Mushrooms.setPosition(tilemap_to_pixels(11), tilemap_to_pixels(23))
-    Any_other_Effects.setPosition(tilemap_to_pixels(35), tilemap_to_pixels(23))
-    what_are_these_hallucinations.setPosition(tilemap_to_pixels(24), tilemap_to_pixels(37))
+    rocketBoosters.setPosition(-1000, 0)
+    What_are_Majic_Mushrooms.setPosition(tilemap_to_pixels(11), tilemap_to_pixels(32))
+    Any_other_Effects.setPosition(tilemap_to_pixels(35), tilemap_to_pixels(32))
+    what_are_these_hallucinations.setPosition(tilemap_to_pixels(24), tilemap_to_pixels(46))
     Majic_Mushrooms_presentation_title.setPosition(tilemap_to_pixels(23), tilemap_to_pixels(11))
 }
 function AppendText (TextArray: TextSprite[], Text: string) {
@@ -88,8 +88,13 @@ function FillText () {
     AppendText(textWhatAreShrooms, "are called trips. you can have these mushrooms")
     AppendText(textWhatAreShrooms, "either fresh or dried, and to consume it you")
     AppendText(textWhatAreShrooms, "can either eat it or mix it with a tea.")
-    MakeText(textWhatAreShrooms, 2, 24, 20, 30)
-    AppendText(textWhatAreHallucinations, "The hallucinations that a person gets from magic mushrooms depends on a couple factors,")
+    AppendText(textWhatAreShrooms, "keep in mind if you eat to much you'll get")
+    AppendText(textWhatAreShrooms, "psychosis. Another thing is if you eat a lot")
+    AppendText(textWhatAreShrooms, "you'll get effects similar to LSD.")
+    MakeText(textWhatAreShrooms, 2, 33, 20, 41)
+    AppendText(textWhatAreHallucinations, "Effects of the mushrooms start after 30 to 45 minuites and can go as long as 6 hours")
+    AppendText(textWhatAreHallucinations, "Hallucinations is one of these effects, and can be unpredictable, luckily their are a few")
+    AppendText(textWhatAreHallucinations, "factors that can help decide what your hallucination is to make it simpler. These are,")
     AppendText(textWhatAreHallucinations, "the persons mood, their personality, expectations the person has, and of course how much")
     AppendText(textWhatAreHallucinations, "you ate and how strong those mushrooms are. Now what can these hallucinations be becasuse")
     AppendText(textWhatAreHallucinations, "of those factors? well, hallucinations can range from having a relaxing day to a scary ")
@@ -98,15 +103,16 @@ function FillText () {
     AppendText(textWhatAreHallucinations, "Hallucinations can happen at any point of the day and their is no warning it will happen.")
     AppendText(textWhatAreHallucinations, "for some mushroom users after the effects of magic mushrooms have gone away, they may have")
     AppendText(textWhatAreHallucinations, "a flashback of a hallucination. Just like hallucinations their is no warning it will start.")
-    MakeText(textWhatAreHallucinations, 8, 38, 41, 46)
+    MakeText(textWhatAreHallucinations, 8, 47, 41, 57)
     AppendText(textWhatOtherEffects, "Other effects that may happen if you eat")
     AppendText(textWhatOtherEffects, "these include: increased heart rate and")
     AppendText(textWhatOtherEffects, "blood pressure, drowsiness, muscle weakness,")
-    AppendText(textWhatOtherEffects, "dilated pupils, and lack of coordination.")
-    AppendText(textWhatOtherEffects, "Sometimes when someone takes a large amount")
-    AppendText(textWhatOtherEffects, "of magic mushrooms the side effects are big")
-    AppendText(textWhatOtherEffects, "enough to cause death.")
-    MakeText(textWhatOtherEffects, 26, 24, 43, 30)
+    AppendText(textWhatOtherEffects, "dilated pupils, lack of coordination,")
+    AppendText(textWhatOtherEffects, "and they also sometimes alter someones")
+    AppendText(textWhatOtherEffects, "sense of reality. Sometimes when someone")
+    AppendText(textWhatOtherEffects, "takes a large amount of mushrooms the side")
+    AppendText(textWhatOtherEffects, "effects are big enough to cause death.")
+    MakeText(textWhatOtherEffects, 26, 33, 43, 41)
 }
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     if (selector_position == 0) {
@@ -165,11 +171,11 @@ let dummyTextSprite: TextSprite = null
 let Any_other_Effects: TextSprite = null
 let what_are_these_hallucinations: TextSprite = null
 let What_are_Majic_Mushrooms: TextSprite = null
-let rocket_boosters = false
+let rocketBoostersOn = false
 let selector_position = 0
 let shrek: Sprite = null
 let Majic_Mushrooms_presentation_title: Sprite = null
-let Rocket_Boosters: TextSprite = null
+let rocketBoosters: TextSprite = null
 let pressentation: TextSprite = null
 scene.setBackgroundImage(img`
     22222222222222222222222222f3333333333333333333333333333333333333333333333f555555555555555555555555555555555555555f222222222222222222222222222222222222222222f333
@@ -296,10 +302,8 @@ scene.setBackgroundImage(img`
 pressentation = textsprite.create("Presentation", 8, 7)
 pressentation.setBorder(1, 15, 3)
 pressentation.setPosition(90, 90)
-Rocket_Boosters = textsprite.create("Rocket Boosters", 8, 7)
-Rocket_Boosters.setBorder(1, 15, 3)
-Rocket_Boosters.setPosition(99, 110)
-Rocket_Boosters.setIcon(img`
+rocketBoosters = textsprite.create("Rocket Boosters", 8, 7)
+rocketBoosters.setIcon(img`
     . 7 7 7 7 7 7 . 
     7 7 5 5 5 5 7 7 
     7 5 5 5 5 5 5 7 
@@ -309,6 +313,8 @@ Rocket_Boosters.setIcon(img`
     7 7 5 5 5 5 7 7 
     . 7 7 7 7 7 7 . 
     `)
+rocketBoosters.setBorder(1, 15, 3)
+rocketBoosters.setPosition(99, 110)
 Majic_Mushrooms_presentation_title = sprites.create(img`
     .......................................................................................................................................................................................................................................................................................................................................................................................
     .......................................................................................................................................................................................................................................................................................................................................................................................
@@ -625,7 +631,7 @@ shrek = sprites.create(img`
     `, SpriteKind.Player)
 shrek.setPosition(-1000, 0)
 selector_position = 1
-rocket_boosters = true
+rocketBoostersOn = true
 What_are_Majic_Mushrooms = textsprite.create("What Are Magic Mushrooms?", 0, 15)
 What_are_Majic_Mushrooms.setMaxFontHeight(10)
 What_are_Majic_Mushrooms.setPosition(-1700, 0)
